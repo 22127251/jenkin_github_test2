@@ -17,7 +17,7 @@ pipeline {
         stage('Pull image from dockerhub and run in container') {
             steps {
                 bat 'docker pull 22127251/jenkin_dockerhub_test2'
-                bat 'docker run -d -p 443:8080 22127251/jenkin_dockerhub_test2'
+                bat 'docker run -d -p 443:80 22127251/jenkin_dockerhub_test2'
             }
         }        
     }
