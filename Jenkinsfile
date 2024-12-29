@@ -17,7 +17,7 @@ pipeline {
         stage('Check and stop existing container') {
             steps {
                 script {
-                    def containerId = bat(script: 'docker ls --filter "publish=3000" --format "{{.ID}}"', returnStdout: true).trim()
+                    def containerId = bat(script: 'docker ls --filter publish=3000 --format "{{.ID}}"', returnStdout: true).trim()
                     if (containerId) {
                         bat "docker stop ${containerId}"
                         bat "docker rm ${containerId}"
