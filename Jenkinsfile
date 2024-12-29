@@ -14,10 +14,21 @@ pipeline {
                 }
             }
         }
+        stage('Check and stop existing container') {
+            steps {
+                script {
+                    def containerId = bat(script: "docker ps -q -f \"publish=3000\"", returnStdout: true).trim()
+                    if (containerId) {
+                        bat "docker stop ${containerId}"
+                        bat "docker rm ${containerId}"
+                    }
+                }
+            }
+        }
         stage('Pull image from dockerhub and run in container') {
             steps {
                 bat 'docker pull 22127251/jenkin_dockerhub_test2'
-                bat 'docker run -d -p 8081:80 22127251/jenkin_dockerhub_test2'
+                bat 'docker run -d -p 3000:80 22127251/jenkin_dockerhub_test2'
             }
         }        
     }

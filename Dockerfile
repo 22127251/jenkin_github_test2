@@ -1,3 +1,7 @@
-FROM nginx:latest
+FROM node:13-alpine
 
-COPY index.html /usr/share/nginx/htm
+EXPOSE 80
+
+RUN mkdir -p /usr/src/app
+
+COPY example.html /usr/src/app
